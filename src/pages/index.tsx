@@ -3,7 +3,28 @@ import Head from "next/head";
 import { SEIDAN_ALL_MEMBERS } from "../types";
 import { RankingTable } from "./components/RankingTable";
 
+/*
+  X: RankingTable
+  A: おごりロジック
+  B: モーダル
+*/
+
 const Home: NextPage = () => {
+  // A: memberをstateで保持する
+
+  // X: ソートされたメンバーを定数で宣言する
+
+  // B: モーダルを表示しているかどうかのstateを作成
+
+  // A: 名前と金額を受け取り、その名前のmemberに金額分のpaidAmountを上乗せするメソッド
+  const gochi = () => {};
+
+  // B: モーダルを開いた状態にするメソッド
+  const openModal = () => {};
+
+  // B: モーダルを閉じた状態にするメソッド
+  const closeModal = () => {};
+
   return (
     <div className="">
       <Head>
@@ -15,9 +36,19 @@ const Home: NextPage = () => {
         <h1>おごる担当はだれ？</h1>
         <input type="text" placeholder="おごる人" />
         <button>この人！</button>
+        {/* A: はじめに500円追加するボタンを実装 */}
+
+        {/* A: ひろむに500円追加するボタンを実装 */}
+
+        {/* A: こうすけに500円追加するボタンを実装 */}
+
+        {/* B: モーダルを表示するボタン */}
+
         <input type="text" placeholder="追加メンバー" />
 
-        <RankingTable members={SEIDAN_ALL_MEMBERS} />
+        {/* X: ソートされたメンバー情報を渡してRankingTableを表示する */}
+
+        {/* B: モーダルを開いている状態ならばモーダルを表示 */}
       </main>
     </div>
   );

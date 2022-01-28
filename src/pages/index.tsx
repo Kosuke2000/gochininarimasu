@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useState } from "react";
 import { SEIDAN_ALL_MEMBERS } from "../types";
 import { RankingTable } from "./components/RankingTable";
 
@@ -11,9 +12,9 @@ import { RankingTable } from "./components/RankingTable";
 
 const Home: NextPage = () => {
   // A: memberをstateで保持する
-
+  const [members, setMembers] = useState([...SEIDAN_ALL_MEMBERS]);
   // X: ソートされたメンバーを定数で宣言する
-
+  const rankedMembers = members.sort((a, b) => b.paidAmount - a.paidAmount);
   // B: モーダルを表示しているかどうかのstateを作成
 
   // A: 名前と金額を受け取り、その名前のmemberに金額分のpaidAmountを上乗せするメソッド
@@ -47,7 +48,7 @@ const Home: NextPage = () => {
         <input type="text" placeholder="追加メンバー" />
 
         {/* X: ソートされたメンバー情報を渡してRankingTableを表示する */}
-
+        <RankingTable members={rankedMembers} />
         {/* B: モーダルを開いている状態ならばモーダルを表示 */}
       </main>
     </div>

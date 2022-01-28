@@ -6,12 +6,17 @@ interface RankingTableItemProps {
   member: Member;
 }
 
-export const RankingTableItem: VFC<RankingTableItemProps> = ({}) => {
+export const RankingTableItem: VFC<RankingTableItemProps> = ({
+  rank,
+  member,
+}) => {
+  const { nickname, paidAmount } = member;
+
   return (
     <tr>
-      <td>１位</td>
-      <td>田中</td>
-      <td>27</td>
+      <td>{rank + 1}位</td>
+      <td>{nickname}</td>
+      <td>{paidAmount}</td>
     </tr>
   );
 };
@@ -20,7 +25,7 @@ interface RankingTableProps {
   members: Member[];
 }
 
-export const RankingTable: VFC<RankingTableProps> = ({}) => {
+export const RankingTable: VFC<RankingTableProps> = ({ members }) => {
   return (
     <table>
       <tr>
@@ -28,21 +33,11 @@ export const RankingTable: VFC<RankingTableProps> = ({}) => {
         <th>名前</th>
         <th>金額</th>
       </tr>
-      <tr>
-        <td>１位</td>
-        <td>田中</td>
-        <td>27</td>
-      </tr>
-      <tr>
-        <td>２位</td>
-        <td>佐藤</td>
-        <td>42</td>
-      </tr>
-      <tr>
-        <td>３位</td>
-        <td>佐藤</td>
-        <td>42</td>
-      </tr>
+      {members.map((member, i) => {
+        return (
+          <RankingTableItem key={member.nickname} member={member} rank={i} />
+        );
+      })}
     </table>
   );
 };

@@ -1,5 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { SEIDAN_ALL_MEMBERS } from "../types";
+import { RankingTable } from "./components/RankingTable";
 
 const Home: NextPage = () => {
   return (
@@ -14,28 +16,8 @@ const Home: NextPage = () => {
         <input type="text" placeholder="おごる人" />
         <button>この人！</button>
         <input type="text" placeholder="追加メンバー" />
-        <table>
-          <tr>
-            <th>順位</th>
-            <th>名前</th>
-            <th>金額</th>
-          </tr>
-          <tr>
-            <td>１位</td>
-            <td>田中</td>
-            <td>27</td>
-          </tr>
-          <tr>
-            <td>２位</td>
-            <td>佐藤</td>
-            <td>42</td>
-          </tr>
-          <tr>
-            <td>３位</td>
-            <td>佐藤</td>
-            <td>42</td>
-          </tr>
-        </table>
+
+        <RankingTable members={SEIDAN_ALL_MEMBERS} />
       </main>
     </div>
   );

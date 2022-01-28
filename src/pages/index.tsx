@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { SEIDAN_ALL_MEMBERS } from "../types";
 import { RankingTable } from "./components/RankingTable";
 
@@ -11,16 +11,23 @@ import { RankingTable } from "./components/RankingTable";
 */
 
 const Home: NextPage = () => {
-  // A: memberをstateで保持する
+  // A: membersをstateで保持する
   const [members, setMembers] = useState([...SEIDAN_ALL_MEMBERS]);
   // X: ソートされたメンバーを定数で宣言する
   const rankedMembers = members.sort((a, b) => b.paidAmount - a.paidAmount);
   // B: モーダルを表示しているかどうかのstateを作成
 
   // A: 名前と金額を受け取り、その名前のmemberに金額分のpaidAmountを上乗せするメソッド
-  const gochi = () => {};
+  const gochi = (payerName: string, sum: number) => {
+    members.map((member, i) => {
+      payerName == member.name &&
+        (member.paidAmount = member.paidAmount + sum) &&
+        members.splice(i) &&
+        members.push(member);
+      setMembers(members);
+    });
+  };
 
-  // B: モーダルを開いた状態にするメソッド
   const openModal = () => {};
 
   // B: モーダルを閉じた状態にするメソッド
@@ -37,12 +44,21 @@ const Home: NextPage = () => {
         <h1>おごる担当はだれ？</h1>
         <input type="text" placeholder="おごる人" />
         <button>この人！</button>
-        {/* A: はじめに500円追加するボタンを実装 */}
-
-        {/* A: ひろむに500円追加するボタンを実装 */}
-
-        {/* A: こうすけに500円追加するボタンを実装 */}
-
+        <div>
+          {/* A: はじめに500円追加するボタンを実装 */}
+          <button onClick={() => gochi("Hajime", 500)}>
+            はじめ、ゴチになります！
+          </button>
+          {/* A: ひろむに500円追加するボタンを実装 */}
+          <button onClick={() => gochi("Hiromu", 500)}>
+            ひろむ、ゴチになります！
+          </button>
+          {/* A: こうすけに500円追加するボタンを実装 */}
+          <button onClick={() => gochi("Kosuke", 500)}>
+            こうすけ、ゴチになります！
+          </button>
+        </div>
+        {console.log({ members })}
         {/* B: モーダルを表示するボタン */}
 
         <input type="text" placeholder="追加メンバー" />

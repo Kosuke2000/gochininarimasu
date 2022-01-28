@@ -10,12 +10,12 @@ export const RankingTableItem: VFC<RankingTableItemProps> = ({
   rank,
   member,
 }) => {
-  const { nickname, paidAmount } = member;
+  const { name, paidAmount } = member;
 
   return (
     <tr>
       <td>{rank + 1}位</td>
-      <td>{nickname}</td>
+      <td>{name}</td>
       <td>{paidAmount}</td>
     </tr>
   );
@@ -34,7 +34,7 @@ export const RankingTable: VFC<RankingTableProps> = ({ members }) => {
         <th>金額</th>
       </tr>
       {members.map((member, i) => (
-        <RankingTableItem key={member.nickname} member={member} rank={i} />
+        <RankingTableItem key={member.name} member={member} rank={i} />
       ))}
     </table>
   );

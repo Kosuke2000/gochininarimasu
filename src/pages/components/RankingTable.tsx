@@ -33,11 +33,9 @@ export const RankingTable: VFC<RankingTableProps> = ({ members }) => {
         <th>名前</th>
         <th>金額</th>
       </tr>
-      {members.map((member, i) => {
-        return (
-          <RankingTableItem key={member.nickname} member={member} rank={i} />
-        );
-      })}
+      {members.map((member, i) => (
+        <RankingTableItem key={member.nickname} member={member} rank={i} />
+      ))}
     </table>
   );
 };

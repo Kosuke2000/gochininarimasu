@@ -1,8 +1,6 @@
-import { privateDecrypt } from "crypto";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
-import { Member, SeidanMemberName, SEIDAN_ALL_MEMBERS } from "../types";
+import { useGochi } from "../hooks";
 import { RankingTable } from "./components/RankingTable";
 
 /*
@@ -12,34 +10,7 @@ import { RankingTable } from "./components/RankingTable";
 */
 
 const Home: NextPage = () => {
-  // A: membersをstateで保持する
-  const [members, setMembers] = useState([...SEIDAN_ALL_MEMBERS]);
-  // X: ソートされたメンバーを定数で宣言する
-  const rankedMembers = members.sort((a, b) => b.paidAmount - a.paidAmount);
-  // B: モーダルを表示しているかどうかのstateを作成
-
-  // A: 名前と金額を受け取り、その名前のmemberに金額分のpaidAmountを上乗せするメソッド
-  const gochi = (payerName: SeidanMemberName, payment: number) => {
-    // 方法１
-    // payerNameとnameが同じか判定
-    //　同じだった場合、paidAmoutにpaymentを上乗せ
-    // 方法２
-    // payerNameを持つmemberを指定
-    // そのmemberのpaidAmountにpayment分を加える
-    // 方法３
-    // 支払い者とそれ以外を分離
-    const payer: Member = members.filter(
-      (member) => member.name === payerName
-    )[0];
-    const notPayers: Member[] = members.filter(
-      (member) => member.name !== payerName
-    );
-    //　支払い者にpaymentを加算
-    payer.paidAmount = payer.paidAmount + payment;
-    // stateを更新
-    notPayers.push(payer);
-    setMembers(notPayers);
-  };
+  const [rankedMembers, gochi] = useGochi();
 
   const openModal = () => {};
 

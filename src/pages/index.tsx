@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useRef } from "react";
 import { useGochi, usePayment, useToggleModal } from "../hooks";
 import { Modal } from "../components/Modal";
 import { RankingTable } from "../components/RankingTable";

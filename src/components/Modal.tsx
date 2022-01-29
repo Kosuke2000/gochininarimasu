@@ -1,5 +1,5 @@
 import { VFC } from "react";
-import { Member } from "../../types";
+import { Member } from "../types";
 
 /*
  - 全体に薄く広がる暗めの背景

@@ -1,5 +1,5 @@
 import { VFC } from "react";
-import { Member } from "../../types";
+import { Member } from "../types";
 
 interface RankingTableItemProps {
   rank: number;

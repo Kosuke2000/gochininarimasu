@@ -173,9 +173,11 @@ const Team: VFC<TeamProps> = ({ team }) => {
       <ul>
         <li>{ballpark}</li>
         <li>{ranking}</li>
-        <li>{coach}</li>
+        <li>
+          <Coach coach={coach} />
+        </li>
         {players.map((player, i) => {
-          return <Player player={player} key={i} />;
+          <Player player={player} key={i} />;
         })}
       </ul>
     </div>

@@ -16,10 +16,4 @@ export const SEIDAN_ALL_MEMBERS: Member[] = [
   { name: "Kosuke", paidAmount: 100 },
 ];
 
-export const SEIDAN_FORMS0 = { payerName: "Hajime", sum: 500 };
-export const SEIDAN_FORMS1 = { payerName: "Hiromu", sum: 500 };
-export const SEIDAN_FORMS2 = { payerName: "Kosuke", sum: 500 };
-
-export const forms0 = SEIDAN_FORMS0;
-export const forms1 = SEIDAN_FORMS1;
-export const forms2 = SEIDAN_FORMS2;
+export type SeidanMemberName = typeof SEIDAN_ALL_MEMBERS[number]["name"];

@@ -1,7 +1,8 @@
+import { privateDecrypt } from "crypto";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useCallback, useState } from "react";
-import { SEIDAN_ALL_MEMBERS } from "../types";
+import { useState } from "react";
+import { Member, SeidanMemberName, SEIDAN_ALL_MEMBERS } from "../types";
 import { RankingTable } from "./components/RankingTable";
 
 /*
@@ -18,14 +19,26 @@ const Home: NextPage = () => {
   // B: モーダルを表示しているかどうかのstateを作成
 
   // A: 名前と金額を受け取り、その名前のmemberに金額分のpaidAmountを上乗せするメソッド
-  const gochi = (payerName: string, sum: number) => {
-    members.map((member, i) => {
-      payerName == member.name &&
-        (member.paidAmount = member.paidAmount + sum) &&
-        members.splice(i) &&
-        members.push(member);
-      setMembers(members);
-    });
+  const gochi = (payerName: SeidanMemberName, payment: number) => {
+    // 方法１
+    // payerNameとnameが同じか判定
+    //　同じだった場合、paidAmoutにpaymentを上乗せ
+    // 方法２
+    // payerNameを持つmemberを指定
+    // そのmemberのpaidAmountにpayment分を加える
+    // 方法３
+    // 支払い者とそれ以外を分離
+    const payer: Member = members.filter(
+      (member) => member.name === payerName
+    )[0];
+    const notPayers: Member[] = members.filter(
+      (member) => member.name !== payerName
+    );
+    //　支払い者にpaymentを加算
+    payer.paidAmount = payer.paidAmount + payment;
+    // stateを更新
+    notPayers.push(payer);
+    setMembers(notPayers);
   };
 
   const openModal = () => {};
@@ -58,7 +71,6 @@ const Home: NextPage = () => {
             こうすけ、ゴチになります！
           </button>
         </div>
-        {console.log({ members })}
         {/* B: モーダルを表示するボタン */}
 
         <input type="text" placeholder="追加メンバー" />

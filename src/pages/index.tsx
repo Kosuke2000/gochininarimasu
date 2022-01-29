@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useRef } from "react";
 import { useGochi, usePayment, useToggleModal } from "../hooks";
 import { Modal } from "./components/Modal";
 import { RankingTable } from "./components/RankingTable";
@@ -13,10 +14,15 @@ import { RankingTable } from "./components/RankingTable";
 const Home: NextPage = () => {
   const [rankedMembers, gochi] = useGochi();
   const [isModalOpen, open, close] = useToggleModal();
-  const [payment, changePayment] = usePayment();
+  const [payment, changePayment, reset] = usePayment();
 
   const r = Math.floor(Math.random() * rankedMembers.length);
   const payer = rankedMembers[r];
+
+  const onProceed = () => {
+    gochi(payer, payment);
+    reset();
+  };
 
   return (
     <>
@@ -35,6 +41,7 @@ const Home: NextPage = () => {
               <p className="dark:text-white">今回のお支払いは、</p>
               <input
                 type="number"
+                value={payment}
                 onChange={changePayment}
                 className="py-2 px-3 leading-tight text-yellow-300 dark:dark:bg-slate-500 rounded border dark:border-slate-800 focus:outline-none shadow appearance-none"
                 placeholder="0"
@@ -54,11 +61,7 @@ const Home: NextPage = () => {
         </main>
       </div>
       {isModalOpen && (
-        <Modal
-          member={payer}
-          close={close}
-          onProceed={() => gochi(payer, payment)}
-        />
+        <Modal member={payer} close={close} onProceed={onProceed} />
       )}
     </>
   );

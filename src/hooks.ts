@@ -37,14 +37,22 @@ export const useToggleModal = (): [boolean, () => void, () => void] => {
   return [isModalOpen, open, close];
 };
 
-export const usePayment = (): [
+type UsePayment = () => [
   number,
-  (e: React.ChangeEvent<HTMLInputElement>) => void
-] => {
+  (e: React.ChangeEvent<HTMLInputElement>) => void,
+  () => void
+];
+
+export const usePayment: UsePayment = () => {
   const [payment, setPayment] = useState(0);
+
   const changePayment = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPayment(Number(e.target.value));
   };
 
-  return [payment, changePayment];
+  const reset = () => {
+    setPayment(0);
+  };
+
+  return [payment, changePayment, reset];
 };

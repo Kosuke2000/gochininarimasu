@@ -39,8 +39,8 @@ export const useToggleModal = (): [boolean, () => void, () => void] => {
 
 type UsePayment = () => [
   number,
-  (e: React.ChangeEvent<HTMLInputElement>) => void,
-  () => void
+  (e: React.ChangeEvent<HTMLInputElement>) => void
+  // () => void
 ];
 
 export const usePayment: UsePayment = () => {
@@ -50,9 +50,9 @@ export const usePayment: UsePayment = () => {
     setPayment(Number(e.target.value));
   };
 
-  const reset = () => {
-    setPayment(0);
-  };
+  // const reset = () => {
+  //   setPayment(0);
+  // };
 
-  return [payment, changePayment, reset];
+  return [payment, changePayment];
 };

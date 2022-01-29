@@ -14,14 +14,14 @@ import { Member } from "../../types";
 interface ModalProps {
   member: Member;
   close: () => void;
-  proceed: () => void;
+  onProceed: () => void;
 }
 
-export const Modal: VFC<ModalProps> = ({ member, close, proceed }) => {
+export const Modal: VFC<ModalProps> = ({ member, close, onProceed }) => {
   const { name, paidAmount } = member;
 
-  const gochi = () => {
-    proceed();
+  const proceed = () => {
+    onProceed();
     close();
   };
 
@@ -44,7 +44,7 @@ export const Modal: VFC<ModalProps> = ({ member, close, proceed }) => {
             キャンセル
           </button>
           <button
-            onClick={gochi}
+            onClick={proceed}
             className="py-2 px-4 font-bold text-white bg-blue-500 hover:bg-blue-700 rounded"
           >
             ゴチボタン

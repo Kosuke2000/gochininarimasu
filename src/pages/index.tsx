@@ -14,10 +14,9 @@ import { RankingTable } from "./components/RankingTable";
 const Home: NextPage = () => {
   const [rankedMembers, gochi] = useGochi();
   const [isModalOpen, open, close] = useToggleModal();
-  // 金額を入力変更できるように、stateで表示する
   const [payment, setPayment] = useState(0);
 
-  // 入力した金額をstateにセットする関数を、入力が起こるたびに呼ぶ
+  // usePayment
   const changePayment = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPayment(Number(e.target.value));
   };
@@ -49,7 +48,7 @@ const Home: NextPage = () => {
         <Modal
           member={payer}
           close={close}
-          proceed={() => gochi(payer, payment)}
+          onProceed={() => gochi(payer, payment)}
         />
       )}
     </>

@@ -27,7 +27,7 @@ export const Modal: VFC<ModalProps> = ({ member, close, onProceed }) => {
 
   return (
     <div className="flex absolute top-0 left-0 z-10 justify-center items-center w-screen h-screen bg-slate-200/75 dark:dark:bg-slate-500/75">
-      <div className="flex flex-col justify-center p-4 w-4/5 h-1/2 bg-white dark:bg-slate-900 opacity-100 md:w-1/2">
+      <div className="flex flex-col justify-center p-4 w-4/5 h-1/2 bg-white dark:bg-slate-900 rounded shadow opacity-100 md:w-1/2">
         <div className="flex flex-col justify-between items-center p-4 h-3/5">
           <h1 className="text-4xl dark:text-white">{name}さん</h1>
           <p className="dark:text-white">ごちになります!!!</p>

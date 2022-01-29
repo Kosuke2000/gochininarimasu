@@ -51,7 +51,7 @@ const Home: NextPage = () => {
             <div className="flex justify-around w-full">
               <button
                 onClick={open}
-                className="py-2 px-4 font-bold text-white bg-blue-500 hover:bg-blue-700 dark:bg-violet-600 dark:hover:bg-violet-800 rounded"
+                className="py-2 px-4 font-bold text-white dark:text-slate-700 bg-blue-500 hover:bg-blue-700 dark:bg-yellow-300 dark:hover:bg-yellow-500 rounded"
               >
                 支払いはオレだ！
               </button>

@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
-import { useGochi } from "../hooks";
+import { useGochi, useToggleModal } from "../hooks";
 import { Modal } from "./components/Modal";
 import { RankingTable } from "./components/RankingTable";
 
@@ -13,16 +12,10 @@ import { RankingTable } from "./components/RankingTable";
 
 const Home: NextPage = () => {
   const [rankedMembers, gochi] = useGochi();
+  const [isModalOpen, open, close] = useToggleModal();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const r = Math.floor(Math.random() * rankedMembers.length);
+  const payer = rankedMembers[r];
 
   return (
     <>
@@ -36,32 +29,18 @@ const Home: NextPage = () => {
           <h1>おごる担当はだれ？</h1>
           <input type="text" placeholder="おごる人" />
           <button>この人！</button>
-          <div>
-            <button onClick={() => gochi("Hajime", 500)}>
-              はじめ、ゴチになります！
-            </button>
-            <button onClick={() => gochi("Hiromu", 500)}>
-              ひろむ、ゴチになります！
-            </button>
-            <button onClick={() => gochi("Kosuke", 500)}>
-              こうすけ、ゴチになります！
-            </button>
-          </div>
-          {/* B: モーダルを表示するボタン */}
-          <button onClick={openModal}>いでよモーダル</button>
-          <button onClick={closeModal}>消えよモーダル</button>
+          <button onClick={open}>いでよモーダル</button>
+          <button onClick={close}>消えよモーダル</button>
           <input type="text" placeholder="追加メンバー" />
 
-          {/* X: ソートされたメンバー情報を渡してRankingTableを表示する */}
           <RankingTable members={rankedMembers} />
-          {/* B: モーダルを開いている状態ならばモーダルを表示 */}
         </main>
       </div>
       {isModalOpen && (
         <Modal
-          member={rankedMembers[0]}
-          close={closeModal}
-          proceed={() => gochi(rankedMembers[0].name, 500)}
+          member={payer}
+          close={close}
+          proceed={() => gochi(payer.name, 500)}
         />
       )}
     </>

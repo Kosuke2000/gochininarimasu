@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useState } from "react";
 import { useGochi, useToggleModal } from "../hooks";
 import { Modal } from "./components/Modal";
 import { RankingTable } from "./components/RankingTable";
@@ -13,6 +14,13 @@ import { RankingTable } from "./components/RankingTable";
 const Home: NextPage = () => {
   const [rankedMembers, gochi] = useGochi();
   const [isModalOpen, open, close] = useToggleModal();
+  // 金額を入力変更できるように、stateで表示する
+  const [payment, setPayment] = useState(0);
+
+  // 入力した金額をstateにセットする関数を、入力が起こるたびに呼ぶ
+  const changePayment = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPayment(Number(e.target.value));
+  };
 
   const r = Math.floor(Math.random() * rankedMembers.length);
   const payer = rankedMembers[r];
@@ -28,16 +36,21 @@ const Home: NextPage = () => {
         <main>
           <h1>おごる担当はだれ？</h1>
           <input type="text" placeholder="おごる人" />
-          <button>この人！</button>
-          <button onClick={open}>いでよモーダル</button>
-          <button onClick={close}>消えよモーダル</button>
+          <button onClick={open}>この人！</button>
+          <h1>金額：{payment}</h1>
+
+          <input type="number" onChange={changePayment} />
           <input type="text" placeholder="追加メンバー" />
 
           <RankingTable members={rankedMembers} />
         </main>
       </div>
       {isModalOpen && (
-        <Modal member={payer} close={close} proceed={() => gochi(payer, 500)} />
+        <Modal
+          member={payer}
+          close={close}
+          proceed={() => gochi(payer, payment)}
+        />
       )}
     </>
   );

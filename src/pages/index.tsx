@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
-import { useGochi, useToggleModal } from "../hooks";
+import { useGochi, usePayment, useToggleModal } from "../hooks";
 import { Modal } from "./components/Modal";
 import { RankingTable } from "./components/RankingTable";
 
@@ -14,12 +13,7 @@ import { RankingTable } from "./components/RankingTable";
 const Home: NextPage = () => {
   const [rankedMembers, gochi] = useGochi();
   const [isModalOpen, open, close] = useToggleModal();
-  const [payment, setPayment] = useState(0);
-
-  // usePayment
-  const changePayment = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPayment(Number(e.target.value));
-  };
+  const [payment, changePayment] = usePayment();
 
   const r = Math.floor(Math.random() * rankedMembers.length);
   const payer = rankedMembers[r];

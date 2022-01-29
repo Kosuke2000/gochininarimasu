@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Member, SeidanMemberName, SEIDAN_ALL_MEMBERS } from "./types";
+import { Member, SEIDAN_ALL_MEMBERS } from "./types";
 
 export function useGochi(): [
   Member[],
@@ -35,4 +35,16 @@ export const useToggleModal = (): [boolean, () => void, () => void] => {
   };
 
   return [isModalOpen, open, close];
+};
+
+export const usePayment = (): [
+  number,
+  (e: React.ChangeEvent<HTMLInputElement>) => void
+] => {
+  const [payment, setPayment] = useState(0);
+  const changePayment = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPayment(Number(e.target.value));
+  };
+
+  return [payment, changePayment];
 };

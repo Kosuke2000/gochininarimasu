@@ -37,11 +37,7 @@ const Home: NextPage = () => {
         </main>
       </div>
       {isModalOpen && (
-        <Modal
-          member={payer}
-          close={close}
-          proceed={() => gochi(payer.name, 500)}
-        />
+        <Modal member={payer} close={close} proceed={() => gochi(payer, 500)} />
       )}
     </>
   );

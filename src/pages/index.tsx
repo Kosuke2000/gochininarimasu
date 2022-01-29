@@ -13,14 +13,13 @@ import { RankingTable } from "../components/RankingTable";
 const Home: NextPage = () => {
   const [rankedMembers, gochi] = useGochi();
   const [isModalOpen, open, close] = useToggleModal();
-  const [payment, changePayment, reset] = usePayment();
+  const [payment, changePayment] = usePayment();
 
   const r = Math.floor(Math.random() * rankedMembers.length);
   const payer = rankedMembers[r];
 
   const onProceed = () => {
     gochi(payer, payment);
-    reset();
   };
 
   return (
@@ -40,7 +39,6 @@ const Home: NextPage = () => {
               <p className="dark:text-white">今回のお支払いは、</p>
               <input
                 type="number"
-                value={payment}
                 onChange={changePayment}
                 className="py-2 px-3 leading-tight text-yellow-300 dark:text-yellow-500 dark:dark:bg-slate-500 rounded border dark:border-slate-800 focus:outline-none shadow appearance-none"
                 placeholder="0"

@@ -40,7 +40,7 @@ const Home: NextPage = () => {
               <input
                 type="number"
                 onChange={changePayment}
-                className="py-2 px-3 leading-tight text-yellow-300 dark:text-yellow-500 dark:dark:bg-slate-500 rounded border dark:border-slate-800 focus:outline-none shadow appearance-none"
+                className="py-2 px-3 leading-tight text-yellow-500 dark:text-yellow-300 dark:dark:bg-slate-500 rounded border dark:border-slate-800 focus:outline-none shadow appearance-none"
                 placeholder="0"
               />
               <p className="dark:text-white">円</p>

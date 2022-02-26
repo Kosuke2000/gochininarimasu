@@ -11,9 +11,9 @@ interface FormProps {
   form: Form;
 }
 export const SEIDAN_ALL_MEMBERS: Member[] = [
-  { name: "Hajime", paidAmount: 0 },
-  { name: "Hiromu", paidAmount: 10 },
-  { name: "Kosuke", paidAmount: 100 },
+  { name: "Hajime", paidAmount: 1800 + 10736 + 1530 },
+  { name: "Hiromu", paidAmount: 10390 },
+  { name: "Kosuke", paidAmount: 10060 },
 ];
 
 export type SeidanMemberName = typeof SEIDAN_ALL_MEMBERS[number]["name"];
